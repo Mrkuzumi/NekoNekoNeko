@@ -1,9 +1,3 @@
-# 👏👏👏欢迎来到Mika的一生一芯的作业本
-## 主要包含了E2的verilog部分代码（因为驻波写一半了才想起来记录自己写过的代码hh）和E1&E4的c语言代码作业
-## 没了
-
-# 往下是驻波学习写readme.md的笔记
-#
 # 😲我终于学会怎么写简单的readme了！💪
 # （用一个#来体现最大标题）
 ## 🤔比如现在这是次大标题（用两个#）
@@ -43,9 +37,9 @@
 ### 在终端输入
 
 ```bash
- git clone https://github.com/Mrkuzumi/realysyxworkbentch.git 
+ git clone https://github.com/Mrkuzumi/NekoNekoNeko.git 
 ```
-来克隆我的私人仓库（不知道会不会报错我不知道我没试过）
+来克隆当前这个readme所在的仓库
 ## 怎么让语法带上颜色
 ````
 ```c
@@ -67,9 +61,8 @@ printf("hello world");
 
 那么链接我要这样提供给你：
 
-[点击这里跳转我的仓库](https://github.com/Mrkuzumi/realysyxworkbentch)
+[点击这里跳转我的个人主页](https://github.com/Mrkuzumi)
 
-（大概率跳转不了因为是私人仓库）
 
 
 格式是: [你想显示的文字]（url）
@@ -79,7 +72,7 @@ printf("hello world");
 ## 如果我想给你看一张图片
 就像这样：
 
-![这是我的女儿阿尔玛🤩🤩](../aruma.png)
+![这是我的女儿阿尔玛🤩🤩](aruma.png)
 
 格式是： [你给读者看的这个图片的批注]（图片在仓库的地址）
 
