@@ -14,6 +14,28 @@ echo -e "echo 1 > /proc/sys/net/ipv4/ip_forward\niptables -t nat -A POSTROUTING 
 chmod +x /etc/firewall.user
 /etc/init.d/firewall restart
 ```
+## 执行完以上命令，路由器重启后可能会失效，然后再执行：
+```bash
+# 开启 IP 转发
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+# 开启 NAT 伪装（让其他设备能上网）
+iptables -t nat -A POSTROUTING -o eth0.2 -j MASQUERADE
+
+# 设置 TTL 为 128，防多设备检测
+iptables -t mangle -A POSTROUTING -o eth0.2 -j TTL --ttl-set 128
+#把规则写入 /etc/firewall.user，这样每次开机都会自动加载：
+cat >> /etc/firewall.user << 'EOF'
+echo 1 > /proc/sys/net/ipv4/ip_forward
+iptables -t nat -A POSTROUTING -o eth0.2 -j MASQUERADE
+iptables -t mangle -A POSTROUTING -o eth0.2 -j TTL --ttl-set 128
+EOF
+
+chmod +x /etc/firewall.user
+/etc/init.d/firewall restart
+```
 ## 祝你成功，别忘了在LuCI界面设置无线网络的名称密码以及是否开启SSID广播
+> [!CAUTION]
+>### 不过基本的上网是解决了，现在有一个问题就是无法访问我们学校的内网系统，目前还不知道怎么解决，解决了我会更新README的
 ## 整理By：Mika
 ### 2026.3.2 00:02
