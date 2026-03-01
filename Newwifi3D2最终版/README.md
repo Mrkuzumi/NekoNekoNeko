@@ -39,3 +39,13 @@ chmod +x /etc/firewall.user
 >### 不过基本的上网是解决了，现在有一个问题就是无法访问我们学校的内网系统，目前还不知道怎么解决，解决了我会更新README的
 ## 整理By：Mika
 ### 2026.3.2 00:02
+> [!TIP]
+> ## <span style="color: #22c55e;">! 又报错了</span>
+> <span style="color: #22c55e;">我知道，那你说怎么办呢</span>
+
+> [!CAUTION]
+> ## <span style="color: #ef4444;">我乱改一通，居然过了，嘿嘿嘿</span>
+
+> [!CAUTION]
+> ## <span style="color: #ef4444;">又要没完没了的STFW了？</span>
+> <span style="color: #ef4444;">对</span>
