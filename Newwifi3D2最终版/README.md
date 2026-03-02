@@ -71,6 +71,49 @@ chmod +x /etc/firewall.user
 ```
 ## 祝你成功，别忘了在LuCI界面设置无线网络的名称密码以及是否开启SSID广播
 ### 有问题请~~STFAI~~STFW
+> [!TIP]
+> ## 有时候修改完设置重启路由器依然上不了网，就再ssh连接192.168.1.1执行第二段命令就好了
+>### 不过这样好像有点麻烦，为此我让ai写了一个bat脚本，你需要先下载PuTTY的命令行版本plink[点我下载](https://the.earth.li/~sgtatham/putty/latest/w64/plink.exe)，然后要保证plink.exe和脚本.bat在一个目录下，这样理论上讲以后你只要双击这个脚本.bat就可以完成执行第二段脚本的步骤了
+### ai写的脚本：
+```bash
+@echo off
+chcp 65001 > nul
+echo ==============================================
+echo 正在连接路由器 192.168.1.1...
+echo ==============================================
+
+:: 使用plink执行SSH命令，-batch参数避免交互确认
+plink.exe -ssh root@192.168.1.1 -pw password -batch ^
+"echo 1 > /proc/sys/net/ipv4/ip_forward && ^
+iptables -t nat -A POSTROUTING -o eth0.2 -j MASQUERADE && ^
+iptables -t mangle -A POSTROUTING -o eth0.2 -j TTL --ttl-set 128 && ^
+cat >> /etc/firewall.user << 'EOF' && ^
+echo 1 > /proc/sys/net/ipv4/ip_forward && ^
+iptables -t nat -A POSTROUTING -o eth0.2 -j MASQUERADE && ^
+iptables -t mangle -A POSTROUTING -o eth0.2 -j TTL --ttl-set 128 && ^
+EOF && ^
+chmod +x /etc/firewall.user && ^
+/etc/init.d/firewall restart"
+
+:: 检查命令执行结果
+if %errorlevel% equ 0 (
+    echo.
+    echo ==============================================
+    echo 路由器配置执行成功！
+    echo ==============================================
+) else (
+    echo.
+    echo ==============================================
+    echo 错误：路由器配置执行失败！
+    echo 请检查：
+    echo 1. 路由器IP是否为192.168.1.1
+    echo 2. 用户名密码是否正确
+    echo 3. 路由器是否开启SSH服务
+    echo ==============================================
+)
+
+pause
+```
 
 > [!CAUTION]
 >### 基本的上网是解决了，现在有一个问题就是无法访问我们学校的内网系统，目前还不知道怎么解决，解决了我会更新README的
