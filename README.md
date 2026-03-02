@@ -1,137 +1,96 @@
-# 已验证新路由3刷此固件并且进行脚本修改TTL可实现路由器上网
-## 此固件为网上找到的别人编译好的，支持科学，多拨，广告屏蔽（我自己编译和云编译出来的固件总是出错）
-> [!CAUTION]
-># 准备两条网线，全程电脑插着网线连接路由器LAN口，然后墙上网线连接路由器WAN口在刷完固件之后，请先把路由器的WAN口（浏览器进入192.168.1.1路由器后台）和电脑设置”网络偏好设置”的“以太网”的“属性”设为静态ip，将参数和你提前先用电脑连接sztu校园网的参数一样，注意路由器WAN口设置的子网掩码需要根据校园网给你分配的ip地址进行计算，具体换算为
-## 假如我的ip地址为x.x.x.x/23
-![在路由器后台查看到的ip](screenshot1.png)
+# 😲我终于学会怎么写简单的readme了！💪
+# （用一个#来体现最大标题）
+## 🤔比如现在这是次大标题（用两个#）
+### 🤪然后这是中号标题（三个#）
+ 哦对了 “#”必须要和后面的内容之间隔一个空格这样才会生效
 
-CIDR 前缀 /23 的含义
-```text
-/23 表示：子网掩码的二进制形式中，前 23 位 是 1，后面的位是 0。  
-子网掩码是 32 位二进制数，分成 4 段（每段 8 位）：
 
-/23 → 二进制：11111111.11111111.11111110.00000000
+## 加粗 ##
+“## （）（）（）（）（） ##”
+## 斜体 
+*用两个星号✳夹着就好了*
+## 删除线
+就是～～~~夹着文本~~～～
+# 然后是列表部分
+## 无序列表开头用-（减号）
+- ⭐这是第一条列表
+- ⭐这是第二条
+- 。。。以此类推
 
-逐段把二进制转成十进制：
+## 有序列表
+### 直接用数字＋小数点表示
+1. 这是第一条
+2. 这是第二条，按回车会自动跳转到3.
+3. 。。。以此类推
 
-二进制段	十进制值	
-11111111	255	
-11111111	255	
-11111110	254	
-00000000	0	
-所以，/23 对应的子网掩码就是：255.255.254.0 
-```
-```
-你电脑以太网的网段是 192.168.1.0/24：
-/24 → 二进制：11111111.11111111.11111111.00000000
-转十进制：255.255.255.0
-```
-#### ~~其实我说问ai最快~~
+### 用 - [数字] 文本是另外一种格式的有序列表
+- [1] 比如我现在输入了第一条😉
+- [114514] 我懂了这是可以自定义顺序的有序列表😀
+- 就是可以自己输入开头序号的无序列表
 
-## 电脑设置为静态ip效果如图（例）：
-![在网络偏好设置看到的](screenshot2.png)
-```
-电脑以太网 IP 是 192.168.1.3，路由器 LAN 口是 192.168.1.1。
-路由器 LAN 口的网段是 192.168.1.0/24，对应的子网掩码就是 255.255.255.0。
-把电脑以太网子网掩码改成 255.255.255.0，电脑和路由器 LAN 口就完全在同一个网段里，访问 192.168.1.1 会更稳定，也不会和其他网段产生干扰。
-```
-### 刷机后使用PuTTY（或者其它软件） SSH连接192.168.1.1后粘贴以下脚本即可：
+
+# 接下来是提供给读者的代码部分
+假如我想让你克隆当前这个仓库
+用两个英文输入法状态下的波浪线按键\`代码代码代码 \`就可以
+比如:
+### 在终端输入
+
 ```bash
-
-#开启IP转发
-echo 1 > /proc/sys/net/ipv4/ip_forward
-#开启NAT（伪装）
-iptables -t nat -A POSTROUTING -o eth0.2 -j MASQUERADE
-#设置TTL为128，伪装成单设备,我们学校是128，具体多少看你学校
-iptables -t mangle -A POSTROUTING -o eth0.2 -j TTL --ttl-set 128
-#保存规则到防火墙自启（重启不丢）
-echo -e "echo 1 > /proc/sys/net/ipv4/ip_forward\niptables -t nat -A POSTROUTING -o eth0.2 -j MASQUERADE\niptables -t mangle -A POSTROUTING -o eth0.2 -j TTL --ttl-set 128" >> /etc/firewall.user
-chmod +x /etc/firewall.user
-/etc/init.d/firewall restart
+ git clone https://github.com/Mrkuzumi/NekoNekoNeko.git 
 ```
-## 执行完以上命令，路由器重启后可能会失效，然后再执行：
-```bash
-# 开启 IP 转发
-echo 1 > /proc/sys/net/ipv4/ip_forward
-
-# 开启 NAT 伪装（让其他设备能上网）
-iptables -t nat -A POSTROUTING -o eth0.2 -j MASQUERADE
-
-# 设置 TTL 为 128，防多设备检测
-iptables -t mangle -A POSTROUTING -o eth0.2 -j TTL --ttl-set 128
-#把规则写入 /etc/firewall.user，这样每次开机都会自动加载：
-cat >> /etc/firewall.user << 'EOF'
-echo 1 > /proc/sys/net/ipv4/ip_forward
-iptables -t nat -A POSTROUTING -o eth0.2 -j MASQUERADE
-iptables -t mangle -A POSTROUTING -o eth0.2 -j TTL --ttl-set 128
-EOF
-
-chmod +x /etc/firewall.user
-/etc/init.d/firewall restart
+来克隆当前这个readme所在的仓库
+## 怎么让语法带上颜色
+````
+```c
+ printf("hello world"); 
 ```
-## 祝你成功，别忘了在LuCI界面设置无线网络的名称密码以及是否开启SSID广播
-### 有问题请~~STFAI~~STFW
-> [!TIP]
-> ## 有时候修改完设置重启路由器依然上不了网，就再ssh连接192.168.1.1执行第二段命令就好了
->### 不过这样好像有点麻烦，为此我让ai写了一个bat脚本，你需要先下载PuTTY的命令行版本plink[点我下载](https://the.earth.li/~sgtatham/putty/latest/w64/plink.exe)，然后要保证plink.exe和脚本.bat在一个目录下，这样理论上讲以后你只要双击这个脚本.bat就可以完成执行第二段脚本的步骤了
-### ai写的脚本：
-```bash
-@echo off
-chcp 65001 > nul
-echo ==============================================
-echo 正在连接路由器 192.168.1.1...
-echo ==============================================
+````
+### 显示效果👇
 
-:: 使用plink执行SSH命令，-batch参数避免交互确认
-plink.exe -ssh root@192.168.1.1 -pw password -batch ^
-"echo 1 > /proc/sys/net/ipv4/ip_forward && ^
-iptables -t nat -A POSTROUTING -o eth0.2 -j MASQUERADE && ^
-iptables -t mangle -A POSTROUTING -o eth0.2 -j TTL --ttl-set 128 && ^
-cat >> /etc/firewall.user << 'EOF' && ^
-echo 1 > /proc/sys/net/ipv4/ip_forward && ^
-iptables -t nat -A POSTROUTING -o eth0.2 -j MASQUERADE && ^
-iptables -t mangle -A POSTROUTING -o eth0.2 -j TTL --ttl-set 128 && ^
-EOF && ^
-chmod +x /etc/firewall.user && ^
-/etc/init.d/firewall restart"
-
-:: 检查命令执行结果
-if %errorlevel% equ 0 (
-    echo.
-    echo ==============================================
-    echo 路由器配置执行成功！
-    echo ==============================================
-) else (
-    echo.
-    echo ==============================================
-    echo 错误：路由器配置执行失败！
-    echo 请检查：
-    echo 1. 路由器IP是否为192.168.1.1
-    echo 2. 用户名密码是否正确
-    echo 3. 路由器是否开启SSH服务
-    echo ==============================================
-)
-
-pause
+``` c 
+printf("hello world"); 
 ```
-## 补充一点，本身路由器固件是自带NTP的，默认设置如图
-![NTP设置](screenshot3.png)
-> [!CAUTION]
->### 基本的上网是解决了，现在有一个问题就是无法访问我们学校的内网系统，目前还不知道怎么解决，解决了我会更新README的
 
-## 整理By：Mika
+## 🤔那么问题来了
+要怎么显示出```呢
 
-> [!TIP]
-> ## <span style="color: #22c55e;">! 又报错了</span>
-> <span style="color: #22c55e;">我知道，那你说怎么办呢</span>
+那就是再在外层套````(一对四个共八个)就好啦
+# 接下来是链接/图片的提供
+比如你想进入我的个人主页视奸我🤤
 
-> [!CAUTION]
-> ## <span style="color: #ef4444;">我乱改一通，居然过了，嘿嘿嘿</span>
+那么链接我要这样提供给你：
 
-> [!CAUTION]
-> ## <span style="color: #ef4444;">又要没完没了的STFW了？</span>
-> <span style="color: #ef4444;">对</span>
+[点击这里跳转我的个人主页](https://github.com/Mrkuzumi)
 
-## 送大家一句话，不要问我经历了什么：
-> [!CAUTION]
-> *不要随便执行AI助手给的删除命令*
+
+
+格式是: [你想显示的文字]（url）
+
+⚠在代码文件看来，上面显示出来的文本是我可以自定义的（也就是“[ ]”里面的部分），但是小括号里面的网址就是你真正想让读者跳转的网址，如实填写即可
+
+## 如果我想给你看一张图片
+就像这样：
+
+![这是我的女儿阿尔玛🤩🤩](aruma.png)
+
+格式是： [你给读者看的这个图片的批注]（图片在仓库的地址）
+
+*如果你的图片和你的readme.md文件在同意仓库目录下，那么括号里面直接写那个图片的文件名就好了，如果在当前目录下的一个名为img（假如是）的文件夹里面，那么括号里面就写/img/图片文件名  就好，如果是在上一级目录，就可以写../img/图片名*
+
+# 章节分割
+用‘-----------------’
+
+可以说是字面意义了，就是纯好看
+
+# 尾声
+非常感谢你能看到这里，本篇readme到这里也差不多结束啦，~~特别鸣谢：豆包小姐~~,也是终于学会怎么写readme了，弥补了我在github上面创建第一个仓库的时候不会写readme的遗憾了
+
+纯手敲，如有遗漏还请读者斧正
+
+其实写这篇readme动机就是在乱逛github的时候看到别人项目里面的readme为什么能写那么好看，于是就开始STFW这个语法什么什么的，我想这烂记性不如好笔头（？😂）遂敲了一篇笔是笔记吧，全程纯手敲，学到了不少东西，还学会了把windows的文件怎么拷贝到wsl的~目录下，然后git add完之后必须要git commit才能git push，不可以跳过git commit（比如在给读者展示图片那一节），这对日后wsl和windows之间的联动更加清晰步骤了
+
+
+
+
+
+
