@@ -16,7 +16,7 @@ $env:HTTPS_PROXY="http://127.0.0.1:7890"
 >## 注意7890这个端口要看你的clash开放的端口是多少，一般默认为7890
 >
 
-[查看clash端口](./pic/pic1.png)
+![查看clash端口](./pic/pic1.png)
 
 ## 打开TUN模式
 
@@ -35,11 +35,11 @@ Setup notes:
 Native installation exists but C:\Users\你的用户名\.local\bin is notin your PATH. Add it by opening: System Properties Environment Variables Edit User PATH New Add the path above. Then restart your terminal.
 ```
 
-[需要添加环境变量](./pic/pic2.png)
+![需要添加环境变量](./pic/pic2.png)
 
 ## 然后你需要去到系统环境变量，找到Path,双击打开后新建一个变量，并且将灰色字段的**C:\Users\你的用户名\.local\bin**粘贴进去。有了这一步，你才能够在任意文件夹的位置输入claude启动。
 
-[添加教程](./pic/hjbl.png)
+![添加教程](./pic/hjbl.png)
 
 # 步骤③：小破解（也算不上）
 ## 去到你的%User%目录下，会有一个 **.claude.json**的文件，在最后一个 **true**之后加一个英文逗号，然后新起一行，输入：
@@ -47,7 +47,7 @@ Native installation exists but C:\Users\你的用户名\.local\bin is notin your
 
 "hasCompletedOnboarding":true 
 ```
-[添加破解](./pic/pic3.png)
+![添加破解](./pic/pic3.png)
 
 然后你就可以绕过claude官方登录认证了
 
@@ -71,7 +71,7 @@ $env:CLAUDE_CODE_EFFORT_LEVEL="max"
 
 ## 也许你可以在与Path同等级的地方新建以上变量，如图一样的效果，查询ai以获得一键添加的bash代码
 
-[永久环境变量的效果](./pic/pic4.png)
+![永久环境变量的效果](./pic/pic4.png)
 
 然后基本就配置完毕了，输入
 ```bash
@@ -79,11 +79,11 @@ claude
 ```
 唤醒小螃蟹，注意检查是否成功接入deepseek
 
-[底层模型是ds](./pic/pic5.png)
+![底层模型是ds](./pic/pic5.png)
 
 可询问它是什么模型，或让它写一个printf hello world的程序。然后去ds的官网查看用量信息
 
-[用量信息](./pic/pic6.png)
+![用量信息](./pic/pic6.png)
 
 # Tips：
 在同一项目文件夹下，输入
