@@ -37,7 +37,7 @@ Native installation exists but C:\Users\你的用户名\.local\bin is notin your
 
 ![需要添加环境变量](./pic/pic2.png)
 
-## 然后你需要去到系统环境变量，找到Path,双击打开后新建一个变量，并且将灰色字段的**C:\Users\你的用户名\.local\bin**粘贴进去。有了这一步，你才能够在任意文件夹的位置输入claude启动。
+## 然后你需要去到系统环境变量，找到Path双击打开后新建一个变量，并且将灰色字段的**C:\Users\你的用户名\\.local\bin**粘贴进去。有了这一步，你才能够在任意文件夹的位置输入claude启动。
 
 ![添加教程](./pic/hjbl.png)
 
