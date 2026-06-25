@@ -56,14 +56,14 @@ Native installation exists but C:\Users\你的用户名\.local\bin is notin your
 ## 在你的需要工作的项目文件夹空白处右键，点击在终端中打开，输入：
 
 ```bash
-$env:ANTHROPIC_BASE_URL="https://api.deepseek.com/anthropic"
-$env:ANTHROPIC_AUTH_TOKEN="把这里替换为你的APIkey，引号要保留"
-$env:ANTHROPIC_MODEL="deepseek-v4-pro[1m]"
-$env:ANTHROPIC_DEFAULT_OPUS_MODEL="deepseek-v4-pro[1m]"
-$env:ANTHROPIC_DEFAULT_SONNET_MODEL="deepseek-v4-pro[1m]"
-$env:ANTHROPIC_DEFAULT_HAIKU_MODEL="deepseek-v4-flash"
-$env:CLAUDE_CODE_SUBAGENT_MODEL="deepseek-v4-flash"
-$env:CLAUDE_CODE_EFFORT_LEVEL="max"
+[Environment]::SetEnvironmentVariable("ANTHROPIC_BASE_URL", "https://api.deepseek.com/anthropic", "Machine")
+[Environment]::SetEnvironmentVariable("ANTHROPIC_AUTH_TOKEN", "替换为你的真实APIKey", "Machine")
+[Environment]::SetEnvironmentVariable("ANTHROPIC_MODEL", "deepseek-v4-pro[1m]", "Machine")
+[Environment]::SetEnvironmentVariable("ANTHROPIC_DEFAULT_OPUS_MODEL", "deepseek-v4-pro[1m]", "Machine")
+[Environment]::SetEnvironmentVariable("ANTHROPIC_DEFAULT_SONNET_MODEL", "deepseek-v4-pro[1m]", "Machine")
+[Environment]::SetEnvironmentVariable("ANTHROPIC_DEFAULT_HAIKU_MODEL", "deepseek-v4-flash", "Machine")
+[Environment]::SetEnvironmentVariable("CLAUDE_CODE_SUBAGENT_MODEL", "deepseek-v4-flash", "Machine")
+[Environment]::SetEnvironmentVariable("CLAUDE_CODE_EFFORT_LEVEL", "max", "Machine")
 ```
 注意将第2行相应位置替换为你的Deepseek申请到的API密钥。
 
